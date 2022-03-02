@@ -1,22 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
 
+const SVGComponent = (props) => {
+  return (
+    <svg width={props.width} height="200">
+      <rect width={props.width} height="200" style={{fill:"rgb(0,0,255)",stroke:"rgb(0,0,0)",strokeWidth:"10"}} />
+    </svg>
+    );
+}
+
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <SVGComponent width={200} />
+        <SVGComponent width={180} />
+        
       </header>
     </div>
   );
