@@ -1,10 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 
-const SVGComponent = ({width = 200}) => {
+const SVGComponent = ({width = 200, height = 200, fill = "rgb(0,0,255)", stroke = "rgb(0,0,0)", strokeWidth = 10 }) => {
   return (
-    <svg width={width} height="200">
-      <rect width={width} height="200" style={{fill:"rgb(0,0,255)",stroke:"rgb(0,0,0)",strokeWidth:"10"}} />
+    <svg width={width} height={height}>
+      <rect width={width} height={height} style={{fill:fill,stroke:stroke,strokeWidth:strokeWidth}} />
     </svg>
     );
 }
@@ -14,8 +14,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <SVGComponent/>
-        <SVGComponent width={180} />
-        
+        <SVGComponent width={180}  fill="rgb(0,255,0)"/>
+        <SVGComponent width={200}  fill="rgb(255,0,0)"/>
       </header>
     </div>
   );
