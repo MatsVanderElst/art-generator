@@ -4,3 +4,9 @@
  flex-direction: row;
 }
 
+.art__container{
+  margin: 0 auto;
+  width: 90vw;
+  
+}
+

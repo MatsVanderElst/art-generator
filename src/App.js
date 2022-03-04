@@ -3,11 +3,12 @@ import React from 'react';
 
 
 class Form extends React.Component {
-  constructor({color="Blue", count=5 }) {
+  constructor({color=["#990000","#009900","#000099"], count=5, width=150 }) {
     super();
     this.handleColorChange = this.handleColorChange.bind(this);
     this.handleCountChange = this.handleCountChange.bind(this);
-    this.state = { color: color, count: count };
+    this.handleWidthChange = this.handleWidthChange.bind(this);
+    this.state = { color: color, count: count, width: width };
     this.rebuildSVGList();
   }
 
@@ -17,15 +18,20 @@ class Form extends React.Component {
   }
 
   handleCountChange(e){
-    this.setState({count: e.target.value});
-    this.rebuildSVGList();
+    this.setState({count: e.target.value}); 
+    this.rebuildSVGList(e.target.value);
   }
 
-  rebuildSVGList() {
+  handleWidthChange(e) {
+    this.setState({width: e.target.value});
+    this.rebuildSVGList(this.state.count, e.target.value);
+  }
+
+  rebuildSVGList(count=this.state.count, width=this.state.width) {
     const list = [];
-    for (let i = 0; i <= this.state.count; i++) {
+    for (let i = 1; i <= count; i++) {
       list.push(
-        <SVGRect key={i} width={200} fill="rgb(255,0,0)" />
+        <SVGRect key={i} width={width} height={width} fill="rgb(255,0,0)" />
       )
     }
     this.setState({ list: list });
@@ -34,9 +40,14 @@ class Form extends React.Component {
   render() {
     return (  
       <div>
-        <input onChange={this.handleColorChange} type="color" id="color" name="color" required  size="10" value={this.state.color}></input>
+        <input onChange={this.handleColorChange} type="color" id="color1" name="color" required size="10" value={this.state.color[0]}></input>
+        <input onChange={this.handleColorChange} type="color" id="color2" name="color" required size="10" value={this.state.color[1]}></input>
+        <input onChange={this.handleColorChange} type="color" id="color3" name="color" required  size="10" value={this.state.color[2]}></input>
         <input onChange={this.handleCountChange} type="number" id="count" name="count" required value={this.state.count}></input>
-        {this.state.list}
+        <input onChange={this.handleWidthChange} type="number" id="width" name="width" required value={this.state.width}></input>
+        <div className='art__container'>
+          {this.state.list}
+        </div>
       </div>
     );
   }
@@ -81,15 +92,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <SVGRect />
-        <SVGRect width={200}  fill="rgb(0,255,0)"/>
-        <SVGRect width={200} fill="rgb(255,0,0)" />
-        <SVGCircle />
-        <SVGTriangle fill="rgb(255,0,0)" />
-        <SVGQuoarterCircle /> */}
+        
       </header>
-      <Form />
-      {/* <List /> */}
+      <div className="form__container">
+        <Form />
+      </div>
+      
     </div>
   );
 }
