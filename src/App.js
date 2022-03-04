@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 const SVGRect = ({width = 200, height = 200, fill = "rgb(0,0,255)", stroke = "rgb(0,0,0)", strokeWidth = 10 }) => {
@@ -17,6 +16,17 @@ const SVGCircle = ({height = 200, width = 200, cx=1/2*width, cy=1/2*width, r=1/2
     );
 }
 
+const SVGTriangle = ({points = "0,200 200,100 0,0", height = 200, width = 200, stroke = "rgb(0,0,0)", strokeWidth = 20, fill = "rgb(0,0,255)" }) => {
+  return (
+    <svg height={height} width={width} outlineOffset={-10}>
+      <polygon points={points} stroke={stroke} strokeWidth={strokeWidth} fill={fill}   />
+    </svg>
+    );
+}
+
+
+
+
 function App() {
   return (
     <div className="App">
@@ -25,6 +35,7 @@ function App() {
         <SVGRect width={180}  fill="rgb(0,255,0)"/>
         <SVGRect width={200} fill="rgb(255,0,0)" />
         <SVGCircle />
+        <SVGTriangle fill="rgb(255,0,0)" />
       </header>
     </div>
   );
