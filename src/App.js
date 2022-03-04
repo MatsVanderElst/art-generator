@@ -3,17 +3,18 @@ import React from 'react';
 
 
 class Form extends React.Component {
-  constructor({color=["#990000","#009900","#000099"], count=5, width=150 }) {
+  constructor({colors=["#990000","#009900","#000099"], count=5, width=150 }) {
     super();
     this.handleColorChange = this.handleColorChange.bind(this);
     this.handleCountChange = this.handleCountChange.bind(this);
     this.handleWidthChange = this.handleWidthChange.bind(this);
-    this.state = { color: color, count: count, width: width };
+    this.state = { colors: colors, count: count, width: width };
     this.rebuildSVGList();
   }
 
   handleColorChange(e) {
-    this.setState({color: e.target.value});
+    newColors = [];
+    this.setState({colors: [e.target.value]});
     this.rebuildSVGList();
   }
 
@@ -40,9 +41,9 @@ class Form extends React.Component {
   render() {
     return (  
       <div>
-        <input onChange={this.handleColorChange} type="color" id="color1" name="color" required size="10" value={this.state.color[0]}></input>
-        <input onChange={this.handleColorChange} type="color" id="color2" name="color" required size="10" value={this.state.color[1]}></input>
-        <input onChange={this.handleColorChange} type="color" id="color3" name="color" required  size="10" value={this.state.color[2]}></input>
+        <input onChange={this.handleColorChange} type="color" id="color0" colorIndex={0} name="color" required size="10" value={this.state.colors[0]}></input>
+        <input onChange={this.handleColorChange} type="color" id="color1" colorIndex={1} name="color" required size="10" value={this.state.colors[1]}></input>
+        <input onChange={this.handleColorChange} type="color" id="color2" colorIndex={2} name="color" required  size="10" value={this.state.colors[2]}></input>
         <input onChange={this.handleCountChange} type="number" id="count" name="count" required value={this.state.count}></input>
         <input onChange={this.handleWidthChange} type="number" id="width" name="width" required value={this.state.width}></input>
         <div className='art__container'>
@@ -51,6 +52,10 @@ class Form extends React.Component {
       </div>
     );
   }
+}
+
+const getRandomColor = () => {
+  return this.state.colors(getRandomInt(3));
 }
 
 const SVGRect = ({width = 200, height = 200, fill = "rgb(0,0,255)", stroke = "rgb(0,0,0)", strokeWidth = 10 }) => {
