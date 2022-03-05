@@ -41,6 +41,17 @@ html{
   margin-bottom: 1rem;
 }
 
+.form__container input{
+  margin: 0.3rem;
+}
+
+@media only screen and (max-width: 1000px) {
+  .art__container{
+    max-width: 90vw;
+  }
+
+}
+
 /* .form__container{
   display: block;
   margin: 0.5rem;

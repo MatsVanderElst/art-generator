@@ -5,7 +5,7 @@ import React from 'react';
 class Form extends React.Component {
    types = ['rect', 'circle', 'triangle', 'quarter'];
 
-  constructor({color1="#990000",color2="#009900",color3="#000099", count=165, width=50 }) {
+  constructor({color1="#312525",color2="#521575",color3="#000099", count=513, width=35 }) {
     super();
     this.handleColor1Change = this.handleColor1Change.bind(this);
     this.handleColor2Change = this.handleColor2Change.bind(this);
