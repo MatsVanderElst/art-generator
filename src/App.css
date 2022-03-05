@@ -1,12 +1,14 @@
-.App {
+/* .App {
  display: flex;
  flex-wrap: wrap;
  flex-direction: row;
-}
+} */
 
 .art__container{
+  display: block;
   margin: 0 auto;
-  width: 90vw;
-  
+  width: max-content;
+  max-width: 90vw;
+  align-items: center;
 }
 

@@ -3,18 +3,29 @@ import React from 'react';
 
 
 class Form extends React.Component {
-  constructor({colors=["#990000","#009900","#000099"], count=5, width=150 }) {
+  constructor({color1="#990000",color2="#009900",color3="#000099", count=5, width=150 }) {
     super();
-    this.handleColorChange = this.handleColorChange.bind(this);
+    this.handleColor1Change = this.handleColor1Change.bind(this);
+    this.handleColor2Change = this.handleColor2Change.bind(this);
+    this.handleColor3Change = this.handleColor3Change.bind(this);
     this.handleCountChange = this.handleCountChange.bind(this);
     this.handleWidthChange = this.handleWidthChange.bind(this);
-    this.state = { colors: colors, count: count, width: width };
+    this.state = {count: count, width: width, color1: color1, color2: color2, color3: color3 };
     this.rebuildSVGList();
   }
 
-  handleColorChange(e) {
-    newColors = [];
-    this.setState({colors: [e.target.value]});
+  handleColor1Change(e) {
+    this.setState({color1: [e.target.value]});
+    this.rebuildSVGList();
+  }
+
+  handleColor2Change(e) {
+    this.setState({color2: [e.target.value]});
+    this.rebuildSVGList();
+  }
+
+  handleColor3Change(e) {
+    this.setState({color3: [e.target.value]});
     this.rebuildSVGList();
   }
 
@@ -32,20 +43,28 @@ class Form extends React.Component {
     const list = [];
     for (let i = 1; i <= count; i++) {
       list.push(
-        <SVGRect key={i} width={width} height={width} fill="rgb(255,0,0)" />
+        <SVGRect key={i} width={width} height={width} fill={this.getRandomColor()} />
       )
     }
     this.setState({ list: list });
   }
 
+  getRandomColor = () => {
+    const colors = [this.state.color1, this.state.color2, this.state.color3];
+    return colors[Math.floor(Math.random() * (3))];
+  }
+
   render() {
     return (  
       <div>
-        <input onChange={this.handleColorChange} type="color" id="color0" colorIndex={0} name="color" required size="10" value={this.state.colors[0]}></input>
-        <input onChange={this.handleColorChange} type="color" id="color1" colorIndex={1} name="color" required size="10" value={this.state.colors[1]}></input>
-        <input onChange={this.handleColorChange} type="color" id="color2" colorIndex={2} name="color" required  size="10" value={this.state.colors[2]}></input>
+      <form>
+        <input onChange={this.handleColor1Change} type="color" id="color0" name="color" required size="10" value={this.state.color1}></input>
+        <input onChange={this.handleColor2Change} type="color" id="color1" name="color" required size="10" value={this.state.color2}></input>
+        <input onChange={this.handleColor3Change} type="color" id="color2" name="color" required  size="10" value={this.state.color3}></input>
         <input onChange={this.handleCountChange} type="number" id="count" name="count" required value={this.state.count}></input>
         <input onChange={this.handleWidthChange} type="number" id="width" name="width" required value={this.state.width}></input>
+      </form>
+        
         <div className='art__container'>
           {this.state.list}
         </div>
@@ -54,14 +73,12 @@ class Form extends React.Component {
   }
 }
 
-const getRandomColor = () => {
-  return this.state.colors(getRandomInt(3));
-}
+
 
 const SVGRect = ({width = 200, height = 200, fill = "rgb(0,0,255)", stroke = "rgb(0,0,0)", strokeWidth = 10 }) => {
   return (
-    <svg width={width} height={height}>
-      <rect width={width} height={height} style={{fill:fill,stroke:stroke,strokeWidth:strokeWidth}} />
+    <svg width={width/* +strokeWidth */} height={height/* +strokeWidth */}>
+      <rect /* x={(5)} y={(5)} */ width={width} height={height} style={{fill:fill,stroke:stroke,strokeWidth:strokeWidth}} />
     </svg>
     );
 }
