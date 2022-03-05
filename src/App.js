@@ -49,14 +49,17 @@ class Form extends React.Component {
     for (let i = 1; i <= count; i++) {
         switch (this.getRandomSVGType()) {
           case 'rect':
-            list.push(<SVGRect key={i} width={width} height={width} fill={this.getRandomColor()} />)
+            list.push(<SVGRect key={i} width={width} height={width} stroke={'none'} fill={this.getRandomColor()} />)
             break;
           case 'triangle':
-            list.push(<SVGTriangle key={i} width={width} height={width} fill={this.getRandomColor()} transform={this.getRandomRotation()} />)
+            list.push(<SVGTriangle key={i} width={width} height={width} stroke={'none'} fill={this.getRandomColor()} transform={this.getRandomRotation()} />)
+            break;
+          case 'quarter':
+            list.push(<SVGQuarterCircle key={i} width={width} height={width} stroke={'none'} fill={this.getRandomColor()} transform={this.getRandomRotation()} />)
             break;
           
           default:
-            list.push(<SVGCircle key={i} width={width} height={width} fill={this.getRandomColor()} />)
+            list.push(<SVGCircle key={i} width={width} height={width} stroke={'none'} fill={this.getRandomColor()} />)
             break;
         }
     
@@ -70,7 +73,7 @@ class Form extends React.Component {
   }
 
   getRandomSVGType = () => {
-    const typeIndex = Math.floor(Math.random() * (3));
+    const typeIndex = Math.floor(Math.random() * (4));
     return this.types[typeIndex];
   }
 
@@ -96,8 +99,8 @@ class Form extends React.Component {
 
   render() {
     return (  
-      <div>
-      <form>
+      <div className="container">
+      <form className="form__container">
         <input onChange={this.handleColor1Change} type="color" id="color0" name="color" required size="10" value={this.state.color1}></input>
         <input onChange={this.handleColor2Change} type="color" id="color1" name="color" required size="10" value={this.state.color2}></input>
         <input onChange={this.handleColor3Change} type="color" id="color2" name="color" required  size="10" value={this.state.color3}></input>
@@ -115,7 +118,7 @@ class Form extends React.Component {
 
 
 
-const SVGRect = ({width = 200, height = 200, fill = "rgb(0,0,255)", stroke = "rgb(0,0,0)", strokeWidth = 10 }) => {
+const SVGRect = ({width = 200, height = 200, fill = "rgb(0,0,255)", stroke = "rgb(0,0,0)", strokeWidth = (width/20) }) => {
   return (
     <svg width={width/* +strokeWidth */} height={height/* +strokeWidth */}>
       <rect /* x={(5)} y={(5)} */ width={width} height={height} style={{fill:fill,stroke:stroke,strokeWidth:strokeWidth}} />
@@ -123,7 +126,7 @@ const SVGRect = ({width = 200, height = 200, fill = "rgb(0,0,255)", stroke = "rg
     );
 }
 
-const SVGCircle = ({height = 200, width = 200, cx=1/2*width, cy=1/2*width, r=1/2*width, stroke = "rgb(0,0,0)", strokeWidth = 10, fill = "rgb(0,0,255)"   }) => {
+const SVGCircle = ({height = 200, width = 200, cx=1/2*width, cy=1/2*width, r=1/2*width, stroke = "rgb(0,0,0)", strokeWidth = (width/20), fill = "rgb(0,0,255)"   }) => {
   return (
     <svg height={height} width={width}>
       <circle cx={cx} cy={cy} r={r} stroke={stroke} strokeWidth={strokeWidth} fill={fill} />
@@ -131,7 +134,7 @@ const SVGCircle = ({height = 200, width = 200, cx=1/2*width, cy=1/2*width, r=1/2
     );
 }
 
-const SVGTriangle = ({points = `0,200 200,100 0,0`, height = 200, width = 200, stroke = "rgb(0,0,0)", strokeWidth = 10, fill = "rgb(0,0,255)", transform="rotate(0)" }) => {
+const SVGTriangle = ({points = `0,200 200,100 0,0`, height = 200, width = 200, stroke = "rgb(0,0,0)", strokeWidth = (width/20), fill = "rgb(0,0,255)", transform="rotate(0)" }) => {
   return (
     <svg height={height} width={width} >
       <polygon points={`0,${width} ${width},${width/2} 0,0`} stroke={stroke} strokeWidth={strokeWidth} fill={fill} transform={transform} transform-origin={"center"} />
@@ -139,10 +142,10 @@ const SVGTriangle = ({points = `0,200 200,100 0,0`, height = 200, width = 200, s
     );
 }
 
-const SVGQuoarterCircle = ({height = 200, width = 200, cx=0, cy=200, r=width, stroke = "rgb(0,0,0)", strokeWidth = width/20, fill = "rgb(0,0,255)"   }) => {
+const SVGQuarterCircle = ({height = 200, width = 200, cx=0, cy=200, r=width, stroke = "none", strokeWidth = (width/20), fill = "rgb(0,0,255)"/* , transform="rotate(0)" */  }) => {
   return (
     <svg height={height} width={width}>
-      <circle cx={cx} cy={cy} r={r} stroke={stroke} strokeWidth={strokeWidth} fill={fill} />
+      <circle cx={cx} cy={cy} r={r} stroke={stroke} strokeWidth={strokeWidth} fill={fill} /* transform={transform} transform-origin={"center"} */ />
     </svg>
     );
 }
@@ -153,6 +156,10 @@ const SVGQuoarterCircle = ({height = 200, width = 200, cx=0, cy=200, r=width, st
 function App() {
   return (
     <div className="App">
+      <div className="greeting">
+        <h1>Modern-art generator</h1>
+        <p>Would you like to create works like Picasso or Mondrian but don't have the time or skills to do so? We'll you're in luck! play with the values below and create a stunning piece of modern art! </p>
+      </div>
       <div className="form__container">
         <Form />
       </div>

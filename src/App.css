@@ -4,6 +4,21 @@
  flex-direction: row;
 } */
 
+html{
+  align-items: center;
+  
+}
+.container{
+  align-content: center;
+  text-align: center;
+}
+
+.greeting{
+  text-align: center;
+  margin: 0 auto;
+  width: 70vw;
+}
+
 .art__container{
   /* display: block; */
   margin: 0 auto;
@@ -18,3 +33,14 @@
    margin: 0 0px -3px;
 }
 
+.form__container{
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+/* .form__container{
+  display: block;
+  margin: 0.5rem;
+}
+ */
