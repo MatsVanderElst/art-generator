@@ -3,6 +3,8 @@ import React from 'react';
 
 
 class Form extends React.Component {
+   types = ['rect', 'circle', 'triangle', 'quarter'];
+
   constructor({color1="#990000",color2="#009900",color3="#000099", count=5, width=150 }) {
     super();
     this.handleColor1Change = this.handleColor1Change.bind(this);
@@ -42,9 +44,19 @@ class Form extends React.Component {
   rebuildSVGList(count=this.state.count, width=this.state.width) {
     const list = [];
     for (let i = 1; i <= count; i++) {
-      list.push(
-        <SVGRect key={i} width={width} height={width} fill={this.getRandomColor()} />
-      )
+        switch (this.getRandomSVGType()) {
+          case 'rect':
+            list.push(<SVGRect key={i} width={width} height={width} fill={this.getRandomColor()} />)
+            break;
+          case 'triangle':
+            list.push(<SVGTriangle key={i} width={width} height={width} fill={this.getRandomColor()} />)
+            break;
+          
+          default:
+            list.push(<SVGCircle key={i} width={width} height={width} fill={this.getRandomColor()} />)
+            break;
+        }
+    
     }
     this.setState({ list: list });
   }
@@ -52,6 +64,11 @@ class Form extends React.Component {
   getRandomColor = () => {
     const colors = [this.state.color1, this.state.color2, this.state.color3];
     return colors[Math.floor(Math.random() * (3))];
+  }
+
+  getRandomSVGType = () => {
+    const typeIndex = Math.floor(Math.random() * (3));
+    return this.types[typeIndex];
   }
 
   render() {
