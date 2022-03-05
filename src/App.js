@@ -5,7 +5,7 @@ import React from 'react';
 class Form extends React.Component {
    types = ['rect', 'circle', 'triangle', 'quarter'];
 
-  constructor({color1="#990000",color2="#009900",color3="#000099", count=5, width=150 }) {
+  constructor({color1="#990000",color2="#009900",color3="#000099", count=165, width=50 }) {
     super();
     this.handleColor1Change = this.handleColor1Change.bind(this);
     this.handleColor2Change = this.handleColor2Change.bind(this);
@@ -13,6 +13,9 @@ class Form extends React.Component {
     this.handleCountChange = this.handleCountChange.bind(this);
     this.handleWidthChange = this.handleWidthChange.bind(this);
     this.state = {count: count, width: width, color1: color1, color2: color2, color3: color3 };
+  }
+
+  componentDidMount = () => {
     this.rebuildSVGList();
   }
 
