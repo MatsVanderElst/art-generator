@@ -111,10 +111,10 @@ const SVGCircle = ({height = 200, width = 200, cx=1/2*width, cy=1/2*width, r=1/2
     );
 }
 
-const SVGTriangle = ({points = "0,200 200,100 0,0", height = 200, width = 200, stroke = "rgb(0,0,0)", strokeWidth = 20, fill = "rgb(0,0,255)" }) => {
+const SVGTriangle = ({points = `0,200 200,100 0,0`, height = 200, width = 200, stroke = "rgb(0,0,0)", strokeWidth = 20, fill = "rgb(0,0,255)" }) => {
   return (
     <svg height={height} width={width} >
-      <polygon points={points} stroke={stroke} strokeWidth={strokeWidth} fill={fill}   />
+      <polygon points={`0,${width} ${width},${width/2} 0,0`} stroke={stroke} strokeWidth={strokeWidth} fill={fill}   />
     </svg>
     );
 }
