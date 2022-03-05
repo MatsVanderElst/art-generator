@@ -142,10 +142,10 @@ const SVGTriangle = ({points = `0,200 200,100 0,0`, height = 200, width = 200, s
     );
 }
 
-const SVGQuarterCircle = ({height = 200, width = 200, cx=0, cy=200, r=width, stroke = "none", strokeWidth = (width/20), fill = "rgb(0,0,255)"/* , transform="rotate(0)" */  }) => {
+const SVGQuarterCircle = ({height = 200, width = 200, cx=0, cy=width, r=width, stroke = "none", strokeWidth = (width/20), fill = "rgb(0,0,255)", transform="rotate(0)"  }) => {
   return (
     <svg height={height} width={width}>
-      <circle cx={cx} cy={cy} r={r} stroke={stroke} strokeWidth={strokeWidth} fill={fill} /* transform={transform} transform-origin={"center"} */ />
+      <circle cx={cx} cy={cy} r={r} stroke={stroke} strokeWidth={strokeWidth} fill={fill} transform={transform} transform-origin={"center"} />
     </svg>
     );
 }

@@ -17,13 +17,14 @@ html{
   text-align: center;
   margin: 0 auto;
   width: 70vw;
+  max-width: 50rem;
 }
 
 .art__container{
   /* display: block; */
   margin: 0 auto;
   width: max-content;
-  max-width: 90vw;
+  max-width: 60rem;
   align-items: center;
 
 
@@ -31,6 +32,7 @@ html{
 }
 .art__container svg{
    margin: 0 0px -3px;
+   overflow: hidden;
 }
 
 .form__container{
