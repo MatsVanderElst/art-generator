@@ -5,12 +5,16 @@
 } */
 
 .art__container{
-  display: block;
+  /* display: block; */
   margin: 0 auto;
   width: max-content;
   max-width: 90vw;
   align-items: center;
 
-  background-color: black;
+
+  /* background-color: black; */
+}
+.art__container svg{
+   margin: 0 0px -3px;
 }
 
